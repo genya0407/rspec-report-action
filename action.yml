@@ -11,6 +11,10 @@ inputs:
   json-path:
     description: "JSON File path"
     required: true
+  spec-file-prefix:
+    description: "Prefix for spec files"
+    default: "."
+    required: true
   title:
     description: "Title"
     default: "# :cold_sweat: RSpec failure"

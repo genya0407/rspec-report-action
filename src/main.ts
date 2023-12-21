@@ -6,6 +6,7 @@ import {reportSummary} from './report-summary'
 async function run(): Promise<void> {
   try {
     const jsonPath = core.getInput('json-path', {required: true})
+    const specFilePrefix = core.getInput('spec-file-prefix', {required: true})
 
     try {
       fs.accessSync(jsonPath, fs.constants.R_OK)
@@ -14,7 +15,7 @@ async function run(): Promise<void> {
       return
     }
 
-    const result = parse(jsonPath)
+    const result = parse(jsonPath, specFilePrefix)
     core.info(result.summary)
 
     if (!result.success) {

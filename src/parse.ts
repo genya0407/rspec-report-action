@@ -36,7 +36,7 @@ export type RspecResult = {
   success: boolean
 }
 
-export function parse(resultPath: string): RspecResult {
+export function parse(resultPath: string, specFilePrefix: string): RspecResult {
   // eslint-disable-next-line import/no-dynamic-require,@typescript-eslint/no-var-requires,@typescript-eslint/no-require-imports
   const json = require(
     path.resolve(
@@ -53,7 +53,7 @@ export function parse(resultPath: string): RspecResult {
         description: full_description,
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         message: exception!.message,
-        filePath: file_path.replace(/^\.\//, ''),
+        filePath: path.resolve(specFilePrefix, file_path).replace(/^\.\//, ''),
         lineNumber: line_number
       }
     })
